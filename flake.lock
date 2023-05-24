@@ -1,0 +1,76 @@
+{
+  "nodes": {
+    "flake-utils": {
+      "inputs": {
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1681202837,
+        "narHash": "sha256-H+Rh19JDwRtpVPAWp64F+rlEtxUWBAQW28eAi3SRSzg=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "cfacdce06f30d2b68473a46042957675eebb3401",
+        "type": "github"
+      },
+      "original": {
+        "id": "flake-utils",
+        "type": "indirect"
+      }
+    },
+    "livebook": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1681484354,
+        "narHash": "sha256-khC3gtRvywgAY6qHslZgAV3kmziJgKhdCB8CDg/HkIU=",
+        "owner": "livebook-dev",
+        "repo": "livebook",
+        "rev": "7d24982b57c7e66d63c398cadd1f0a5df8d9de66",
+        "type": "github"
+      },
+      "original": {
+        "owner": "livebook-dev",
+        "ref": "v0.9.2",
+        "repo": "livebook",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1684280442,
+        "narHash": "sha256-nC1/kfh6tpMQSLQalbNTNnireIlxvLLugrjZdasNh+I=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "6c591e7adc514090a77209f56c9d0c551ab8530d",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "root": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "livebook": "livebook",
+        "nixpkgs": "nixpkgs"
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
