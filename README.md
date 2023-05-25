@@ -26,6 +26,12 @@ process management feature of devenv.
 First add the following shell to `flake.nix`:
 
 ``` nix
+let
+  # Use the same versions of Erlang VM. See flake.nix of livebook-flake
+  erlangVersion = "erlangR24";
+  elixirVersion = "elixir_1_14";
+  beamPackages = pkgs.beam.packages.${erlangVersion};
+in
   devShells.livebook = devenv.lib.mkShell {
     inherit inputs pkgs;
     modules = [
@@ -43,9 +49,7 @@ First add the following shell to `flake.nix`:
         enterShell = ''
           export root="$(git rev-parse --show-toplevel)"
 
-          # Use tailscale if you want to access the service from another
-          # machine
-          export LIVEBOOK_IP=127.0.0.1
+          export LIVEBOOK_IP=0.0.0.0
           export LIVEBOOK_HOME="$root/livebook/doc"
 
           export RELEASE_COOKIE=$(cat /dev/urandom | \
