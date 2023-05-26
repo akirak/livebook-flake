@@ -1,15 +1,20 @@
 {
-  pname, version, src, mixRelease, fetchMixDeps, erlang, elixir
-}:
-{
+  version,
+  src,
+  mixRelease,
+  fetchMixDeps,
+  erlang,
+  elixir,
+}: {
   # Let the user pick the same versions of Erlang and Elixir to define a shell
   inherit erlang elixir;
 
   default = mixRelease {
-    inherit pname version src elixir;
+    pname = "livebook";
+    inherit version src elixir;
     # stripDebug = true;
     mixFodDeps = fetchMixDeps {
-      pname = "mix-deps-${pname}";
+      pname = "mix-deps-livebook";
       inherit src version elixir;
       sha256 = "sha256-rwWGs4fGeuyV6BBFgCyyDwKf/YLgs1wY0xnHYy8iioE=";
     };
