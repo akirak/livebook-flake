@@ -26,38 +26,55 @@ process management feature of devenv.
 First add the following shell to `flake.nix`:
 
 ``` nix
-let
-  # Use the same versions of Erlang VM. See flake.nix of livebook-flake
-  erlangVersion = "erlangR24";
-  elixirVersion = "elixir_1_14";
-  beamPackages = pkgs.beam.packages.${erlangVersion};
-in
-  devShells.livebook = devenv.lib.mkShell {
-    inherit inputs pkgs;
-    modules = [
-      {
-        packages = [
-          beamPackages.erlang
-          beamPackages.${elixirVersion}
-          livebook
-        ];
-
-        processes.livebook.exec = ''
-          HOME="$root/livebook" livebook start
-        '';
-
-        enterShell = ''
-          export root="$(git rev-parse --show-toplevel)"
-
-          export LIVEBOOK_IP=0.0.0.0
-          export LIVEBOOK_HOME="$root/livebook/doc"
-
-          export RELEASE_COOKIE=$(cat /dev/urandom | \
-            env LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
-        '';
-      }
-    ];
+{
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    devenv.url = "github:cachix/devenv";
+    livebook-flake.url = "github:akirak/livebook-flake";
   };
+
+  outputs = {
+    self,
+    nixpkgs,
+    devenv,
+    flake-utils,
+    livebook-flake,
+    ...
+  } @ inputs:
+    flake-utils.lib.eachDefaultSystem
+    (
+      system: let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in {
+        devShells.livebook = devenv.lib.mkShell {
+          inherit inputs pkgs;
+          modules = [
+            {
+              packages = with (livebook-flake.packages.${system}); [
+                erlang
+                elixir
+                livebook
+              ];
+
+              processes.livebook.exec = ''
+                HOME="$root/livebook" livebook start
+              '';
+
+              enterShell = ''
+                export root="$(git rev-parse --show-toplevel)"
+
+                export LIVEBOOK_IP=0.0.0.0
+                export LIVEBOOK_HOME="$root/livebook/doc"
+
+                export RELEASE_COOKIE=$(cat /dev/urandom | \
+                  env LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+              '';
+            }
+          ];
+        };
+      }
+    );
+}
 ```
 
 Now you enter the shell:
