@@ -1,7 +1,10 @@
 {
-  pname, version, src, mixRelease, fetchMixDeps, elixir
+  pname, version, src, mixRelease, fetchMixDeps, erlang, elixir
 }:
 {
+  # Let the user pick the same versions of Erlang and Elixir to define a shell
+  inherit erlang elixir;
+
   default = mixRelease {
     inherit pname version src elixir;
     # stripDebug = true;
