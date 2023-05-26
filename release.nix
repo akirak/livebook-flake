@@ -5,11 +5,13 @@
   fetchMixDeps,
   erlang,
   elixir,
-}: {
+}: rec {
   # Let the user pick the same versions of Erlang and Elixir to define a shell
   inherit erlang elixir;
 
-  default = mixRelease {
+  default = livebook;
+
+  livebook = mixRelease {
     pname = "livebook";
     inherit version src elixir;
     # stripDebug = true;
