@@ -3,6 +3,17 @@
 This is a Nix flake for running [Elixir Livebook](https://livebook.dev/) locally
 without installation.
 
+## Configuration
+
+If you don't want to build Livebook on your machine, you can use binary cachix
+hosted on [cachix](https://www.cachix.org/):
+
+``` shell
+cachix use akirak
+```
+
+The artifacts are [built on GitHub Actions](https://github.com/akirak/livebook-flake/blob/master/.github/workflows/build.yml).
+
 ## Usage
 Set `LIVEBOOK_IP` and `LIVEBOOK_HOME` environment variables and run a Nix shell:
 
