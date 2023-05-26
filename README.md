@@ -83,6 +83,12 @@ Now you enter the shell:
 nix develop .#livebook --impure
 ```
 
+Create a directory that you set as `LIVEBOOK_HOME`:
+
+``` shell
+mkdir -p livebook/doc
+```
+
 Start Livebook (and other processes specified within the same shell):
 
 ``` shell
