@@ -25,7 +25,7 @@ export LIVEBOOK_HOME=$PWD/doc
 # project root
 export HOME=$PWD
 
-nix develop github:akirak/livebook-flake -c livebook start
+nix develop github:akirak/livebook-flake --no-write-lock-file -c livebook start
 ```
 
 ### Devenv with flake integration
