@@ -5,7 +5,7 @@ without installation.
 
 ## Configuration
 
-If you don't want to build Livebook on your machine, you can use binary cachix
+If you don't want to build Livebook on your machine, you can use binary cache
 hosted on [cachix](https://www.cachix.org/):
 
 ``` shell
