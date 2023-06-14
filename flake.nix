@@ -17,7 +17,7 @@
     eachSystem = lib.genAttrs (import systems);
 
     version = "0.9.2";
-    erlangVersion = "erlangR26";
+    erlangVersion = "erlangR25";
     elixirVersion = "elixir_1_14";
 
     mkScopeForSystem = system: let
