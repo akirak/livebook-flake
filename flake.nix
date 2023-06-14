@@ -31,36 +31,38 @@
   in {
     packages = eachSystem (
       system:
-        lib.callPackageWith (mkScopeForSystem system)
-        ./release.nix {
-          inherit version;
-          src = inputs.livebook.outPath;
-        }
+        lib.filterAttrs (_: lib.isDerivation)
+        (lib.callPackageWith (mkScopeForSystem system)
+          ./release.nix {
+            inherit version;
+            src = inputs.livebook.outPath;
+          })
     );
 
     devShells = eachSystem (
       system:
-        lib.callPackageWith (mkScopeForSystem system)
-        ({
-          erlang,
-          elixir,
-        }: {
-          default = nixpkgs.legacyPackages.${system}.mkShell {
-            buildInputs = [
-              erlang
-              elixir
-            ];
+        lib.filterAttrs (_: lib.isDerivation)
+        (lib.callPackageWith (mkScopeForSystem system)
+          ({
+            erlang,
+            elixir,
+          }: {
+            default = nixpkgs.legacyPackages.${system}.mkShell {
+              buildInputs = [
+                erlang
+                elixir
+              ];
 
-            nativeBuildInputs = [
-              self.packages.${system}.default
-            ];
+              nativeBuildInputs = [
+                self.packages.${system}.default
+              ];
 
-            shellHook = ''
-              export RELEASE_COOKIE=$(cat /dev/urandom \
-              | env LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
-            '';
-          };
-        }) {}
+              shellHook = ''
+                export RELEASE_COOKIE=$(cat /dev/urandom \
+                | env LC_ALL=C tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+              '';
+            };
+          }) {})
     );
   };
 }
