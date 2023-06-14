@@ -5,9 +5,10 @@
   fetchMixDeps,
   erlang,
   elixir,
+  hex,
 }: rec {
   # Let the user pick the same versions of Erlang and Elixir to define a shell
-  inherit erlang elixir;
+  inherit erlang elixir hex;
 
   default = livebook;
 
