@@ -22,8 +22,6 @@ jobs:
       continue-on-error: true
       id: update
 
-    - run: git rm --cached flake.lock
-
     - uses: peter-evans/create-pull-request@v5
       with:
         commit-message: 'Update Erlang'
