@@ -1,5 +1,7 @@
 # Nix Flake for Running Livebook
 
+**Deprecated since the program is now available from nixpkgs.**
+
 This is a Nix flake for running [Elixir Livebook](https://livebook.dev/) locally
 without installation.
 
